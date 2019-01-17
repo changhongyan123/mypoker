@@ -17,10 +17,15 @@ https://ishikota.github.io/PyPokerEngine/
 
 testing installmement:
 
+```
 import pypokerengine   
 print("hello world")
-
+```
 
 
 ### Set up gui  
-pip install pypokergui
+```pip install pypokergui```
+run the command and replace the yaml file path
+```
+pypokergui serve /Users/ishikota/poker/poker_conf.yaml --port 8000 --speed moderate
+```
