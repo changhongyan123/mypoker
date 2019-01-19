@@ -6,7 +6,9 @@ from honestplayer import HonestPlayer
 
 
 
-config = setup_config(max_round=100, initial_stack=1000, small_blind_amount=20)
+# config = setup_config(max_round=100, initial_stack=1000, small_blind_amount=20)
+config = setup_config(max_round=1, initial_stack=100, small_blind_amount=20)
+
 config.register_player(name="f1", algorithm=FishPlayer())
 config.register_player(name="f2", algorithm=FishPlayer())
 config.register_player(name="f3", algorithm=FishPlayer())
