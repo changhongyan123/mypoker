@@ -18,21 +18,37 @@ $ python testperf.py -n "Smart Warrior" -a smartwarrior
 
 def testperf(agent_name, agent):	
 
-	# setup_config = game.setup_config
-	# start_poker = game.start_poker
+	# Init to play 500 games of 1000 rounds
+	num_game = 500
+	max_round = 1000
+	initial_stack = 10000
+	smallblind_amount = 20
 
-	# config = setup_config(max_round=100, initial_stack=1000, small_blind_amount=20)
-	config = setup_config(max_round=500*1000, initial_stack=10000, small_blind_amount=20)
-	# config.register_player(name="F1", algorithm=FishPlayer())
+	# Init pot of players
+	randplayer_pot = 0
+	agentplayer_pot = 0
+
+	# Setting configuration
+	config = setup_config(max_round=max_round, initial_stack=initial_stack, small_blind_amount=smallblind_amount)
+	
+	# Register players
 	config.register_player(name="R1", algorithm=RandomPlayer())
 	config.register_player(name=agent_name, algorithm=RandomPlayer())
+	
 
-	game_result = start_poker(config, verbose=0)
+	# Start playing num_game games
+	for game in range(1, num_game+1):
+		game_result = start_poker(config, verbose=0)
+		randplayer_pot = randplayer_pot + game_result['players'][0]['stack']
+		agentplayer_pot = agentplayer_pot + game_result['players'][1]['stack']
 
-	print("\n ", game_result)
+	print("\n After playing {} games of {} rounds, the results are: ".format(num_game, max_round))
+	print("\n Random player's final pot: ", randplayer_pot)
+	print("\n " + agent_name + "'s final pot: ", agentplayer_pot)
 
-	print("\n Random player's final stack: ", game_result['players'][0]['stack'])
-	print("\n " + agent_name + "'s final stack: ", game_result['players'][1]['stack'])
+	# print("\n ", game_result)
+	# print("\n Random player's final stack: ", game_result['players'][0]['stack'])
+	# print("\n " + agent_name + "'s final stack: ", game_result['players'][1]['stack'])
 
 def parse_arguments():
     parser = ArgumentParser()
