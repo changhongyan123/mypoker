@@ -1,8 +1,9 @@
 import sys
-sys.path.insert(0, './PyPokerEngine/')
+sys.path.insert(0, './pypokerengine/api/')
 import game
 setup_config = game.setup_config
 start_poker = game.start_poker
+
 # from fishplayer import FishPlayer
 from randomplayer import RandomPlayer
 # from honestplayer import HonestPlayer
@@ -52,7 +53,7 @@ def testperf(agent_name, agent):
 	# print("\n " + agent_name + "'s final stack: ", game_result['players'][1]['stack'])
 
 	if (randplayer_pot<agentplayer_pot):
-		print("\n Congratulations! " + agent_name + "has won.")
+		print("\n Congratulations! " + agent_name + " has won.")
 	elif(randplayer_pot>agentplayer_pot):
 		print("\n Random Player has won!")
 	else:
