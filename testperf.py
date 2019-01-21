@@ -38,6 +38,7 @@ def testperf(agent_name, agent):
 
 	# Start playing num_game games
 	for game in range(1, num_game+1):
+		print("Game number: ", game)
 		game_result = start_poker(config, verbose=0)
 		randplayer_pot = randplayer_pot + game_result['players'][0]['stack']
 		agentplayer_pot = agentplayer_pot + game_result['players'][1]['stack']
@@ -49,6 +50,14 @@ def testperf(agent_name, agent):
 	# print("\n ", game_result)
 	# print("\n Random player's final stack: ", game_result['players'][0]['stack'])
 	# print("\n " + agent_name + "'s final stack: ", game_result['players'][1]['stack'])
+
+	if (randplayer_pot<agentplayer_pot):
+		print("\n Congratulations! " + agent_name + "has won.")
+	elif(randplayer_pot>agentplayer_pot):
+		print("\n Random Player has won!")
+	else:
+		Print("\n Draw. Please try again") 
+
 
 def parse_arguments():
     parser = ArgumentParser()
@@ -62,4 +71,5 @@ if __name__ == '__main__':
 	start = time.time()
 	testperf(name, agent)
 	end = time.time()
+
 	print("\n Time taken to play: %.4f seconds" %(end-start))
