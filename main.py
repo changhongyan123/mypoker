@@ -5,7 +5,17 @@ from randomplayer import RandomPlayer
 from honestplayer import HonestPlayer
 
 
+#TODO:config the config as our wish
+config = setup_config(max_round=10, initial_stack=10000, small_blind_amount=10)
 
+
+
+config.register_player(name="f1", algorithm=RandomPlayer())
+config.register_player(name="f2", algorithm=RandomPlayer())
+
+
+
+<<<<<<< HEAD
 # config = setup_config(max_round=100, initial_stack=1000, small_blind_amount=20)
 config = setup_config(max_round=1, initial_stack=100, small_blind_amount=20)
 
@@ -20,6 +30,8 @@ config.register_player(name="r3", algorithm=RandomPlayer())
 config.register_player(name="r4", algorithm=RandomPlayer())
 config.register_player(name="r5", algorithm=RandomPlayer())
 config.register_player(name="h1", algorithm=HonestPlayer())
+=======
+>>>>>>> hongyan
 
 
 game_result = start_poker(config, verbose=1)

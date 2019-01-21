@@ -3,31 +3,17 @@ import random as rand
 
 class RandomPlayer(BasePokerPlayer):
 
-  def __init__(self):
-    self.fold_ratio = self.call_ratio = raise_ratio = 1.0/3
-
-  def set_action_ratio(self, fold_ratio, call_ratio, raise_ratio):
-    ratio = [fold_ratio, call_ratio, raise_ratio]
-    scaled_ratio = [ 1.0 * num / sum(ratio) for num in ratio]
-    self.fold_ratio, self.call_ratio, self.raise_ratio = scaled_ratio
-
   def declare_action(self, valid_actions, hole_card, round_state):
-    choice = self.__choice_action(valid_actions)
-    action = choice["action"]
-    amount = choice["amount"]
-    if action == "raise":
-      amount = rand.randrange(amount["min"], max(amount["min"], amount["max"]) + 1)
-    return action, amount
-
-  def __choice_action(self, valid_actions):
+    # valid_actions format => [raise_action_info, call_action_info, fold_action_info]
     r = rand.random()
-    if r <= self.fold_ratio:
-      return valid_actions[0]
-    elif r <= self.call_ratio:
-      return valid_actions[1]
+    if r <= 0.5:
+      call_action_info = valid_actions[1]
+    elif r<= 0.9:
+      call_action_info = valid_actions[2]
     else:
-      return valid_actions[2]
-
+      call_action_info = valid_actions[0]
+    action, amount = call_action_info["action"], call_action_info["amount"]
+    return action, amount  # action returned here is sent to the poker engine
 
   def receive_game_start_message(self, game_info):
     pass
@@ -38,7 +24,7 @@ class RandomPlayer(BasePokerPlayer):
   def receive_street_start_message(self, street, round_state):
     pass
 
-  def receive_game_update_message(self, new_action, round_state):
+  def receive_game_update_message(self, action, round_state):
     pass
 
   def receive_round_result_message(self, winners, hand_info, round_state):
