@@ -1,18 +1,13 @@
 from pypokerengine.players import BasePokerPlayer
-import random as rand
 
-class RandomPlayer(BasePokerPlayer):
+class RaisedPlayer(BasePokerPlayer):
 
   def declare_action(self, valid_actions, hole_card, round_state):
-    # valid_actions format => [raise_action_info, call_action_info, fold_action_info]
-    r = rand.random()
-    if r <= 0.5:
-      call_action_info = valid_actions[1]
-    elif r<= 0.9 and len(valid_actions ) == 3:
-      call_action_info = valid_actions[2]
-    else:
-      call_action_info = valid_actions[0]
-    action, amount = call_action_info["action"], call_action_info["amount"]
+    for i in valid_actions:
+        if i["action"] == "raise":
+            action, amount = i["action"], i["amount"]
+            return action, amount  # action returned here is sent to the poker engine
+    action, amount = valid_actions[1]["action"], valid_actions[1]["amount"]
     return action, amount  # action returned here is sent to the poker engine
 
   def receive_game_start_message(self, game_info):
