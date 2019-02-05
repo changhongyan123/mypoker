@@ -1,5 +1,6 @@
 from pypokerengine.engine.dealer import Dealer
 from pypokerengine.players import BasePokerPlayer
+from pypokerengine.utils.timeout_decorator import timeout2
 
 def setup_config(max_round, initial_stack, small_blind_amount, ante=0):
     return Config(max_round, initial_stack, small_blind_amount, ante)
@@ -11,6 +12,7 @@ def start_poker(config, verbose=2):
     dealer.set_blind_structure(config.blind_structure)
     for info in config.players_info:
         dealer.register_player(info["name"], info["algorithm"])
+        # print(info["algorithm"].declare_action)
     result_message = dealer.start_game(config.max_round)
     return _format_result(result_message)
 
@@ -35,6 +37,9 @@ class Config(object):
             base_msg = 'Poker player must be child class of "BasePokerPlayer". But its parent was "%s"'
             raise TypeError(base_msg % algorithm.__class__.__bases__)
 
+        # Wrap the function with a timeout
+        default_action_info      = ("fold",0)  # Fold
+        algorithm.declare_action = timeout2(0.5,default_action_info)(algorithm.declare_action)
         info = { "name" : name, "algorithm" : algorithm }
         self.players_info.append(info)
 

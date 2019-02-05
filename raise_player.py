@@ -1,8 +1,10 @@
 from pypokerengine.players import BasePokerPlayer
+from time import sleep
 
 class RaisedPlayer(BasePokerPlayer):
 
   def declare_action(self, valid_actions, hole_card, round_state):
+    sleep(1)
     for i in valid_actions:
         if i["action"] == "raise":
             action, amount = i["action"], i["amount"]
