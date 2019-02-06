@@ -25,9 +25,9 @@ class RoundManager:
     return state, start_msg + street_msgs
 
   @classmethod
-  def apply_action(self, original_state, action, bet_amount):
+  def apply_action(self, original_state, action):
     state = self.__deep_copy_state(original_state)
-    state = self.__update_state_by_action(state, action, bet_amount)
+    state,bet_amount = self.__update_state_by_action(state, action)
     update_msg = self.__update_message(state, action, bet_amount)
     if self.__is_everyone_agreed(state):
       [player.save_street_action_histories(state["street"]) for player in state["table"].seats.players]
@@ -40,6 +40,9 @@ class RoundManager:
       next_player = state["table"].seats.players[next_player_pos]
       ask_message = (next_player.uuid, MessageBuilder.build_ask_message(next_player_pos, state))
       return state, [update_msg, ask_message]
+
+
+
 
   @classmethod
   def __correct_ante(self, ante_amount, players):
@@ -144,14 +147,22 @@ class RoundManager:
       return state, street_start_msg + ask_message
 
   @classmethod
-  def __update_state_by_action(self, state, action, bet_amount):
+  def __update_state_by_action(self, state, action):
     table = state["table"]
+    current_amount = ActionChecker.agree_amount(state["table"].seats.players)
+    bet = ActionChecker.round_raise_amount(state["small_blind_amount"],state["street"])
+    if action == "raise":
+      amount = current_amount + bet[0]
+    elif action == "call":
+      amount =  current_amount
+    elif action == "fold":
+      amount = 0
     action, bet_amount = ActionChecker.correct_action(\
-        table.seats.players, state["next_player"], state["small_blind_amount"], action, bet_amount)
+        table.seats.players, state["next_player"], state["small_blind_amount"], action, amount)
     next_player = table.seats.players[state["next_player"]]
     if ActionChecker.is_allin(next_player, action, bet_amount):
       next_player.pay_info.update_to_allin()
-    return self.__accept_action(state, action, bet_amount)
+    return self.__accept_action(state, action, bet_amount),amount
 
   @classmethod
   def __accept_action(self, state, action, bet_amount):

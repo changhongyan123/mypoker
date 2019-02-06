@@ -46,8 +46,8 @@ class Dealer:
       #TODO:update the play_round
       self.__message_check(msgs, state["street"])
       if state["street"] != Const.Street.FINISHED:  # continue the round
-        action, bet_amount = self.__publish_messages(msgs)
-        state, msgs = RoundManager.apply_action(state, action, bet_amount)
+        action = self.__publish_messages(msgs)
+        state, msgs = RoundManager.apply_action(state, action)
       else:  # finish the round after publish round result
         self.__publish_messages(msgs)
         break

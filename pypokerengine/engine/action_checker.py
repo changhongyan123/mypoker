@@ -34,19 +34,19 @@ class ActionChecker:
 
   @classmethod
   def legal_actions(self, players, player_pos, sb_amount,street):
-    raise_amount,raise_limit = self.__round_raise_amount(sb_amount,street)
+    raise_amount,raise_limit = self.round_raise_amount(sb_amount,street)
     current_amount = self.agree_amount(players)
     player_raised_number = self.__player_raise_number(players,player_pos,street)
     if current_amount < raise_limit and player_raised_number < 4:
       return [
-          { "action" : "fold" , "amount" : 0 },
-          { "action" : "call" , "amount" : current_amount },
-          { "action" : "raise", "amount" : raise_amount+current_amount }
+          { "action" : "fold"  },
+          { "action" : "call" },
+          { "action" : "raise"}
       ]
     else:
       return [
-        {"action": "fold", "amount": 0},
-        {"action": "call", "amount": current_amount}
+        {"action": "fold"},
+        {"action": "call"}
       ]
 
   @classmethod
@@ -92,7 +92,7 @@ class ActionChecker:
       return max(raise_histories, key=lambda h: h["amount"])  # maxby
 
   @classmethod
-  def __round_raise_amount(self, sb_amount,street):
+  def round_raise_amount(self, sb_amount,street):
     if street == 0 or street == 1:
       return sb_amount * 2, sb_amount * 2 * 4
     else:
