@@ -40,7 +40,7 @@ class RaisedPlayer(BasePokerPlayer):
 
   def declare_action(self, valid_actions, hole_card, round_state):
     #Implement your stragy code 
-    return action, amount  #Note: modify the action and amount is not allowed here.
+    return action
 
   def receive_game_start_message(self, game_info):
     pass
@@ -64,14 +64,14 @@ class RaisedPlayer(BasePokerPlayer):
 
 ```
 [
-    { "action" : "fold" , "amount" : int },
-    { "action" : "call" , "amount" : int },
-    { "action" : "raise", "amount" : int }
+    { "action" : "fold"  },
+    { "action" : "call" },
+    { "action" : "raise" }
 ]
 OR 
 [
-    {"action": "fold", "amount": int},
-    {"action": "call", "amount": int}
+    {"action": "fold"},
+    {"action": "call"}
 ]
 ```
 

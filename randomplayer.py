@@ -12,8 +12,8 @@ class RandomPlayer(BasePokerPlayer):
       call_action_info = valid_actions[2]
     else:
       call_action_info = valid_actions[0]
-    action, amount = call_action_info["action"], call_action_info["amount"]
-    return action, amount  # action returned here is sent to the poker engine
+    action = call_action_info["action"]
+    return action  # action returned here is sent to the poker engine
 
   def receive_game_start_message(self, game_info):
     pass

@@ -5,10 +5,10 @@ class RaisedPlayer(BasePokerPlayer):
   def declare_action(self, valid_actions, hole_card, round_state):
     for i in valid_actions:
         if i["action"] == "raise":
-            action, amount = i["action"], i["amount"]
-            return action, amount  # action returned here is sent to the poker engine
-    action, amount = valid_actions[1]["action"], valid_actions[1]["amount"]
-    return action, amount  # action returned here is sent to the poker engine
+            action = i["action"]
+            return action  # action returned here is sent to the poker engine
+    action = valid_actions[1]["action"]
+    return action # action returned here is sent to the poker engine
 
   def receive_game_start_message(self, game_info):
     pass
