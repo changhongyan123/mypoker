@@ -4,7 +4,6 @@
 using the conda or pyenv
 
 - conda create -n cs3243 python=2.7
-- conda env remove --name cs3243
 - source activate cs3243
 
 replace the cs3243 with whatever name you want
@@ -23,23 +22,16 @@ print("hello world")
 ```
 
 
-### Set up gui  
-```pip install pypokergui```
-run the command and replace the yaml file path
-```
-pypokergui serve /Users/ishikota/poker/poker_conf.yaml --port 8000 --speed moderate
-```
-
 
 ### Create your own player
-#### Example
+#### Example player
 
 ```
 
 class RaisedPlayer(BasePokerPlayer):
 
   def declare_action(self, valid_actions, hole_card, round_state):
-    #Implement your stragy code 
+    #Implement your code
     return action
 
   def receive_game_start_message(self, game_info):
@@ -57,6 +49,8 @@ class RaisedPlayer(BasePokerPlayer):
   def receive_round_result_message(self, winners, hand_info, round_state):
     pass
 ```
+#### Example Game
+The example game is in the example.py
 
 #### Information for the game
 ```valid_actions```: vaild action list
@@ -76,6 +70,6 @@ OR
 ```
 
 In the limited version, user only allowed to raise for four time in one round game.    
-In addition, in each street (preflop,flop,turn,river),only allowed to raise for four times.
+In addition, in each street (preflop,flop,turn,river),each player only allowed to raise for four times.
 
 Other information is similar to the PyPokerEngine,please check the detail about the parameter [link](https://github.com/ishikota/PyPokerEngine/blob/master/AI_CALLBACK_FORMAT.md)
