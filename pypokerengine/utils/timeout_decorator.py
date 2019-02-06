@@ -93,7 +93,7 @@ def timeout(seconds=None, use_signals=True, timeout_exception=TimeoutError, exce
 
     return decorate
 
-def timeout2(seconds=None, defaultretval="Blah"):
+def timeout2(seconds=None, defaultretval="Blah",exception_message="[EXP]: Action TimedOut",timeout_exception=TimeoutError):
     """
         Similar as before return a default value instead.
         Uses Signals. Can you use multiprocessing instead.
@@ -105,10 +105,10 @@ def timeout2(seconds=None, defaultretval="Blah"):
 
         
         def handler(signum, frame):
-            #_raise_exception(timeout_exception, exception_message)
-            print("[EXP] : TimedOut, Returning Default Value (Fold)")
+            _raise_exception(timeout_exception, exception_message)
+            #print("[EXP] : TimedOut, Returning Default Value (Fold)")
             # print(defaultretval)
-            return defaultretval
+            #return defaultretval
         @wraps(function)
         def new_function(*args, **kwargs):
             new_seconds = kwargs.pop('timeout', seconds)
@@ -118,6 +118,9 @@ def timeout2(seconds=None, defaultretval="Blah"):
                 signal.setitimer(signal.ITIMER_REAL, new_seconds)
             try:
                 return function(*args, **kwargs)
+            except TimeoutError :
+                print(exception_message)
+		return defaultretval
             finally:
                 if new_seconds:
                     signal.setitimer(signal.ITIMER_REAL, 0)
