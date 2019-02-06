@@ -157,6 +157,8 @@ class RoundManager:
       amount =  current_amount
     elif action == "fold":
       amount = 0
+    else:
+      amount = 0
     action, bet_amount = ActionChecker.correct_action(\
         table.seats.players, state["next_player"], state["small_blind_amount"], action, amount)
     next_player = table.seats.players[state["next_player"]]
