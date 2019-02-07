@@ -16,11 +16,10 @@ class RaisedPlayer(BasePokerPlayer):
     sleep(1)
     for i in valid_actions:
         if i["action"] == "raise":
-            action, amount = i["action"], i["amount"]
-            #input("RAISED->>>")
-            return action, amount  # action returned here is sent to the poker engine
-    action, amount = valid_actions[1]["action"], valid_actions[1]["amount"]
-    return action, amount  # action returned here is sent to the poker engine
+            action = i["action"]
+            return action  # action returned here is sent to the poker engine
+    action = valid_actions[1]["action"]
+    return action # action returned here is sent to the poker engine
 
   def receive_game_start_message(self, game_info):
     pass
