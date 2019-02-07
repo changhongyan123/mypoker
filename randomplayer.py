@@ -6,8 +6,8 @@ class RandomPlayer(BasePokerPlayer):
 
   def declare_action(self, valid_actions, hole_card, round_state):
     # valid_actions format => [raise_action_pp = pprint.PrettyPrinter(indent=2)
-    pp = pprint.PrettyPrinter(indent=2)
-    print("------------ROUND_STATE(RANDOM)--------")
+    #pp = pprint.PrettyPrinter(indent=2)
+    #print("------------ROUND_STATE(RANDOM)--------")
     #pp.pprint(round_state)
     #print("------------HOLE_CARD----------")
     #pp.pprint(hole_card)

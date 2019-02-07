@@ -38,7 +38,7 @@ class Config(object):
             raise TypeError(base_msg % algorithm.__class__.__bases__)
 
         # Wrap the function with a timeout
-        default_action_info      = ("fold",0)  # Fold
+        default_action_info      = "fold"
         algorithm.declare_action = timeout2(0.5,default_action_info)(algorithm.declare_action)
         info = { "name" : name, "algorithm" : algorithm }
         self.players_info.append(info)

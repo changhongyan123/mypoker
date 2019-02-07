@@ -5,8 +5,8 @@ import pprint
 class RaisedPlayer(BasePokerPlayer):
 
   def declare_action(self, valid_actions, hole_card, round_state):
-    pp = pprint.PrettyPrinter(indent=2)
-    print("------------ROUND_STATE(RAISED)--------")
+    #pp = pprint.PrettyPrinter(indent=2)
+    #print("------------ROUND_STATE(RAISED)--------")
     #pp.pprint(round_state)
     #print("------------HOLE_CARD----------")
     #pp.pprint(hole_card)
