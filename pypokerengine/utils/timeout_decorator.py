@@ -120,7 +120,7 @@ def timeout2(seconds=None, defaultretval="Blah",exception_message="[EXP]: Action
                 return function(*args, **kwargs)
             except TimeoutError :
                 print(exception_message)
-		return defaultretval
+                return defaultretval
             finally:
                 if new_seconds:
                     signal.setitimer(signal.ITIMER_REAL, 0)
