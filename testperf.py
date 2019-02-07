@@ -9,11 +9,12 @@ from argparse import ArgumentParser
 
 """ =========== *Remember to import your agent!!! =========== """
 from randomplayer import RandomPlayer
-from smartwarrior import SmartWarrior
+# from smartwarrior import SmartWarrior
 """ ========================================================= """
 
-""" Example---To run testperf.py with random warrior AI and smart warrior AI
-$ python testperf.py -n1 "Random Warrior" -a1 RandomPlayer -n2 "Smart Warrior" -a2 smartwarrior
+""" Example---To run testperf.py with random warrior AI against itself. 
+
+$ python testperf.py -n1 "Random Warrior 1" -a1 RandomPlayer -n2 "Random Warrior 2" -a2 RandomPlayer
 """
 
 def testperf(agent_name1, agent1, agent_name2, agent2):		
