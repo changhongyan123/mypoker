@@ -11,6 +11,7 @@ from pypokerengine.engine.action_checker import ActionChecker
 from pypokerengine.engine.message_builder import MessageBuilder
 from pypokerengine.players import BasePokerPlayer
 from pypokerengine.utils.game_state_utils import deepcopy_game_state
+from pypokerengine.utils.timeout_decorator import timeout2
 
 class Emulator(object):
 
@@ -31,6 +32,11 @@ class Emulator(object):
     def register_player(self, uuid, player):
         if not isinstance(player, BasePokerPlayer):
             raise TypeError("player must inherit %s class." % BasePokerPlayer)
+        
+        # Wrap the function with a timeout
+        default_action_info      = ("fold",0)  # Fold
+        player.declare_action = timeout2(0.5,default_action_info)(player.declare_action)
+        
         self.players_holder[uuid] = player
 
     def fetch_player(self, uuid):
