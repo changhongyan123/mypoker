@@ -1,8 +1,5 @@
 from pypokerengine.api.game import setup_config, start_poker
-from fishplayer import FishPlayer
-from consoleplayer import ConsolePlayer
 from randomplayer import RandomPlayer
-from honestplayer import HonestPlayer
 from raise_player import RaisedPlayer
 
 #TODO:config the config as our wish
