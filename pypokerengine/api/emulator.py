@@ -60,7 +60,7 @@ class Emulator(object):
         players = game_state["table"].seats.players
         player_pos = game_state["next_player"]
         sb_amount = game_state["small_blind_amount"]
-        return ActionChecker.legal_actions(players, player_pos, sb_amount)
+        return ActionChecker.legal_actions(players, player_pos, sb_amount,game_state["street"])
 
     def apply_action(self, game_state, action, bet_amount=0):
         if game_state["street"] == Const.Street.FINISHED:
