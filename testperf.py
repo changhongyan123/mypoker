@@ -20,8 +20,8 @@ $ python testperf.py -n1 "Random Warrior 1" -a1 RandomPlayer -n2 "Random Warrior
 def testperf(agent_name1, agent1, agent_name2, agent2):		
 
 	# Init to play 500 games of 1000 rounds
-	num_game = 500
-	max_round = 1000
+	# num_game = 500
+	max_round = 500
 	initial_stack = 10000
 	smallblind_amount = 20
 
@@ -37,16 +37,20 @@ def testperf(agent_name1, agent1, agent_name2, agent2):
 	config.register_player(name=agent_name2, algorithm=RandomPlayer())
 	# config.register_player(name=agent_name1, algorithm=agent1())
 	# config.register_player(name=agent_name2, algorithm=agent2())
-	
+
+	game_result = start_poker(config, verbose=0)
+	agent1_pot =  game_result['players'][0]['stack']
+	agent2_pot =  game_result['players'][1]['stack']
 
 	# Start playing num_game games
-	for game in range(1, num_game+1):
-		print("Game number: ", game)
-		game_result = start_poker(config, verbose=0)
-		agent1_pot = agent1_pot + game_result['players'][0]['stack']
-		agent2_pot = agent2_pot + game_result['players'][1]['stack']
+	# for game in range(1, num_game+1):
+	# 	print("Game number: ", game)
+	# 	game_result = start_poker(config, verbose=0)
+	# 	agent1_pot = agent1_pot + game_result['players'][0]['stack']
+	# 	agent2_pot = agent2_pot + game_result['players'][1]['stack']
 
-	print("\n After playing {} games of {} rounds, the results are: ".format(num_game, max_round))
+	# print("\n After playing {} games of {} rounds, the results are: ".format(num_game, max_round))
+	print("\n After playing {} rounds, the results are: ".format(max_round))
 	# print("\n Agent 1's final pot: ", agent1_pot)
 	print("\n " + agent_name1 + "'s final pot: ", agent1_pot)
 	print("\n " + agent_name2 + "'s final pot: ", agent2_pot)
