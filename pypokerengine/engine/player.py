@@ -20,6 +20,7 @@ class Player:
     self.round_action_histories = self.__init_round_action_histories()
     self.action_histories = []
     self.pay_info = PayInfo()
+    self.too_poor = False # If the player is too poor to participate (ie cannot bet the blind amount, then it should be forced to FOLD)
 
   def add_holecard(self, cards):
     if len(self.hole_card) != 0:
