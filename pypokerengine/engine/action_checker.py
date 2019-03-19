@@ -102,11 +102,15 @@ class ActionChecker:
   def __player_raise_number(self,players,player_pos,street):
     raised_number = 0
     histories = players[player_pos].round_action_histories
+    round_actions  = players[player_pos].action_histories
     for rounds in histories:
       if rounds == None:
-        return raised_number
+        break
       else:
         for action in rounds:
           if action["action"] == "RAISE":
             raised_number += 1
+    for r_action in round_actions:
+      if r_action["action"] == "RAISE":
+        raised_number += 1
     return raised_number
