@@ -69,7 +69,6 @@ OR
 ]
 ```
 
-In the limited version, user only allowed to raise for four time in one round game.    
-In addition, in each street (preflop,flop,turn,river),each player only allowed to raise for four times.
+In the limited version, user only allowed to raise for four time in one round street.    
 
 Other information is similar to the PyPokerEngine,please check the detail about the parameter [link](https://github.com/ishikota/PyPokerEngine/blob/master/AI_CALLBACK_FORMAT.md)
