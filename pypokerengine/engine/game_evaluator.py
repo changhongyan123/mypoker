@@ -1,5 +1,6 @@
 from functools import reduce
 from itertools import groupby
+import pprint
 
 from pypokerengine.engine.hand_evaluator import HandEvaluator
 from pypokerengine.engine.pay_info import PayInfo
@@ -51,6 +52,17 @@ class GameEvaluator:
   def __gen_hand_info_if_needed(self, players, community):
     active_players = [player for player in players if player.is_active()]
     gen_hand_info = lambda player: { "uuid": player.uuid, "hand" : HandEvaluator.gen_hand_rank_info(player.hole_card, community) }
+    if (len(active_players) == 2):
+      print("SHOWDOWN Starts for Heads Up, limited poker")
+    for player in active_players :
+      print("player - "+str(player.uuid))
+      print "Hole Card : ",
+      print([str(item) for item in player.hole_card])
+      print "Community Card : ",
+      print([str(item) for item in community])
+      pprint.pprint(gen_hand_info(player))
+      print("-------------------")
+    # print("\n")
     return [] if len(active_players) == 1 else [gen_hand_info(player) for player in active_players]
 
   @classmethod

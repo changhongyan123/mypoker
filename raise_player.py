@@ -10,6 +10,12 @@ class RaisedPlayer(BasePokerPlayer):
             action = i["action"]
             return action  # action returned here is sent to the poker engine
     action = valid_actions[1]["action"]
+    
+    # print("Player Raise")
+    # pprint.pprint(hole_card)
+    # pprint.pprint(round_state)
+    # print("\n")
+    # pprint.pprint(hole_card)
     return action # action returned here is sent to the poker engine
 
   def receive_game_start_message(self, game_info):
@@ -25,6 +31,8 @@ class RaisedPlayer(BasePokerPlayer):
     pass
 
   def receive_round_result_message(self, winners, hand_info, round_state):
+    # print("My ID (round result - raise) : "+self.uuid)
+    # pprint.pprint(round_state)
     pass
 
 def setup_ai():

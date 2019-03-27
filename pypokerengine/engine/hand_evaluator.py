@@ -1,5 +1,6 @@
 from functools import reduce
 from itertools import groupby
+import pprint
 
 class HandEvaluator:
 
@@ -12,6 +13,7 @@ class HandEvaluator:
   FULLHOUSE     = 1 << 13
   FOURCARD      = 1 << 14
   STRAIGHTFLASH = 1 << 15
+  ROYALFLASH    = 1 << 16
 
   HAND_STRENGTH_MAP = {
       HIGHCARD: "HIGHCARD",
@@ -22,7 +24,8 @@ class HandEvaluator:
       FLASH: "FLASH",
       FULLHOUSE: "FULLHOUSE",
       FOURCARD: "FOURCARD",
-      STRAIGHTFLASH: "STRAIGHTFLASH"
+      STRAIGHTFLASH: "STRAIGHTFLASH",
+      ROYALFASH : "ROYALFLASH"
   }
 
   @classmethod
@@ -35,7 +38,7 @@ class HandEvaluator:
     hole_high = self.__mask_hole_high_rank(hand)
     hole_low = self.__mask_hole_low_rank(hand)
 
-    return {
+    ret = {
         "hand" : {
           "strength" : strength,
           "high" : hand_high,
@@ -46,6 +49,8 @@ class HandEvaluator:
           "low" : hole_low
         }
     }
+    # print(ret)
+    return ret
 
   @classmethod
   def eval_hand(self, hole, community):
@@ -57,15 +62,16 @@ class HandEvaluator:
   # Return Format
   # [Bit flg of hand][rank1(4bit)][rank2(4bit)]
   # ex.)
-  #       HighCard hole card 3,4   =>           100 0011
-  #       OnePair of rank 3        =>        1 0011 0000
-  #       TwoPair of rank A, 4     =>       10 1110 0100
-  #       ThreeCard of rank 9      =>      100 1001 0000
-  #       Straight of rank 10      =>     1000 1010 0000
-  #       Flash of rank 5          =>    10000 0101 0000
-  #       FullHouse of rank 3, 4   =>   100000 0011 0100
-  #       FourCard of rank 2       =>  1000000 0010 0000
-  #       straight flash of rank 7 => 10000000 0111 0000
+  #       HighCard hole card 3,4   =>           0100 0011
+  #       OnePair of rank 3        =>         1 0011 0000
+  #       TwoPair of rank A, 4     =>        10 1110 0100
+  #       ThreeCard of rank 9      =>       100 1001 0000
+  #       Straight of rank 10      =>      1000 1010 0000
+  #       Flash of rank 5          =>     10000 0101 0000
+  #       FullHouse of rank 3, 4   =>    100000 0011 0100
+  #       FourCard of rank 2       =>   1000000 0010 0000
+  #       straight flash of rank 7 =>  10000000 0111 0000
+  #       A royal flash            => 100000000 0000 0000  
   @classmethod
   def __calc_hand_info_flg(self, hole, community):
     cards = hole + community
