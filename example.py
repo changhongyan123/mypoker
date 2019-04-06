@@ -8,7 +8,7 @@ config = setup_config(max_round=10000, initial_stack=10000, small_blind_amount=2
 
 
 
-config.register_player(name="FT1", algorithm=RandomPlayer())
+config.register_player(name="FT1", algorithm=RaisedPlayer())
 config.register_player(name="FT2", algorithm=RandomPlayer())
 
 
