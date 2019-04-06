@@ -69,6 +69,7 @@ OR
 ]
 ```
 
-In the limited version, user only allowed to raise for four time in one round street.    
+In the limited version, the user only allowed to raise for four times in one round street.
+In each round, the players can only play raise four times.[In the pre-flop street, the big blind is considered as a Raise action.]
 
 Other information is similar to the PyPokerEngine,please check the detail about the parameter [link](https://github.com/ishikota/PyPokerEngine/blob/master/AI_CALLBACK_FORMAT.md)

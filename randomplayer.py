@@ -48,7 +48,7 @@ class RandomPlayer(BasePokerPlayer):
     # print("\n\n")
     # self.round_count = self.round_count + 1
     print("Random Player")
-    pprint.pprint(round_state)
+    pprint.pprint(hand_info)
     print('\n')
     pass
 

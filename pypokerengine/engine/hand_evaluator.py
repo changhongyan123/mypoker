@@ -44,7 +44,8 @@ class HandEvaluator:
         "hole" : {
           "high" : hole_high,
           "low" : hole_low
-        }
+        },
+        "card": [str(card) for card in hole]
     }
 
   @classmethod
@@ -257,4 +258,3 @@ class HandEvaluator:
   def __mask_hole_low_rank(self, bit):
     mask = 15
     return bit & mask
-
