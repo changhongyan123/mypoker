@@ -10,7 +10,7 @@ class RandomPlayer(BasePokerPlayer):
 
   def declare_action(self, valid_actions, hole_card, round_state):
     print("Random Player")
-    print "Valid Actions : ",
+    print("Valid Actions : ")
     pprint.pprint(valid_actions)
     r = rand.random()
     if r <= 0.5:
@@ -20,7 +20,7 @@ class RandomPlayer(BasePokerPlayer):
     else:
       call_action_info = valid_actions[0]
     action = call_action_info["action"]
-    print "Taken Actions : ",
+    print("Taken Actions : ")
     pprint.pprint(action)
     return action  # action returned here is sent to the poker engine
 
@@ -33,7 +33,7 @@ class RandomPlayer(BasePokerPlayer):
   def receive_round_start_message(self, round_count, hole_card, seats):
     # print("My ID : "+self.uuid+", round count : "+str(round_count)+", hole card : "+str(hole_card))
     # pprint.pprint(seats)
-    # print("-------------------------------")
+    print("-------------------------------")
     pass
 
   def receive_street_start_message(self, street, round_state):
@@ -47,7 +47,7 @@ class RandomPlayer(BasePokerPlayer):
     # pprint.pprint(round_state)
     # print("\n\n")
     # self.round_count = self.round_count + 1
-    print "Random Player",
+    print("Random Player")
     pprint.pprint(round_state)
     print('\n')
     pass

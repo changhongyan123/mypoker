@@ -7,8 +7,8 @@ config = setup_config(max_round=10, initial_stack=10000, small_blind_amount=10)
 
 
 
-config.register_player(name="f1", algorithm=RandomPlayer())
-config.register_player(name="FT2", algorithm=RaisedPlayer())
+config.register_player(name="FT1", algorithm=RaisedPlayer())
+config.register_player(name="FT2", algorithm=RandomPlayer())
 
 
 game_result = start_poker(config, verbose=0)
